@@ -21,6 +21,7 @@
           <input id="tos" type="checkbox">
           <i18n path="term" tag="label" for="tos">
             <a :href="url" target="_blank">{{ $t('tos') }}</a>
+            <a :href="url" target="_blank">{{ $t('tos2') }}</a>
           </i18n>
         </div>
         <input type="submit" value="submit">
@@ -30,18 +31,20 @@
       var messages = {
         en: {
           tos: 'Term of Service',
-          term: 'I accept xxx {0}.'
+          tos2: 'Term of Service2',
+          term: 'I accept xxx {0} {1}.'
         },
         ja: {
           tos: '利用規約',
-          term: '私は xxx の{0}に同意します。'
+          tos2: '利用規約2',
+          term: '私は xxx の{0} {1}に同意します。'
         }
       }
-      
+
       Vue.use(VueI18n)
-      
+
       var i18n = new VueI18n({
-        locale: 'en',
+        locale: 'ja',
         messages: messages
       })
       new Vue({

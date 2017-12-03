@@ -14,23 +14,47 @@
       var messages = {
         en: {
           message: {
-            hello: 'hello world'
+            hello: 'hello world',
+            hello2: 'hello world too'
           }
         },
         ja: {
           message: {
-            hello: 'こんにちは、世界'
+            hello: 'こんにちは、世界',
+            i: 'test i {0} {1}'
           }
         }
       }
-      
+
       Vue.use(VueI18n)
 
       var i18n = new VueI18n({
         locale: 'ja',
         messages: messages
       })
+
       new Vue({ i18n: i18n }).$mount('#app')
+
+      console.log(i18n.t('message.hello'))
+      console.log(i18n.te('message.hello'))
+      console.log(i18n.te('message.hello', 'en'))
+      console.log(i18n.te('message.hello', 'ja'))
+      console.log(i18n.te('message.hello2'))
+      console.log(i18n.te('message.hello2', 'en'))
+
+      // static properties
+      console.log(VueI18n.version)
+      console.log(VueI18n.availabilities)
+
+      // properties
+      console.log(i18n.locale)
+      console.log(i18n.fallbackLocale)
+      console.log(i18n.messages)
+
+      // methods
+      console.log(i18n.getLocaleMessage('en'))
+      console.log(i18n.t('message.i', ['ha', 'hei']))
+      console.log(JSON.stringify(i18n.i('message.i')))
     </script>
   </body>
 </html>
