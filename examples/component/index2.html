@@ -5,48 +5,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Getting Started</title>
-  <!-- <script src="../../node_modules/vue/dist/vue.min.js"></script>
-  <script src="../../dist/vue-i18n.min.js"></script> -->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+  <title>Component based localization</title>
+  <script src="../../node_modules/vue/dist/vue.min.js"></script>
+  <script src="../../dist/vue-i18n.min.js"></script>
 </head>
 
 <body>
   <div id="app">
-    <p>{{ $t("message.hello") }}</p>
+    <p>{{ $t('message.hello') }}</p>
+    <component1></component1>
   </div>
   <script>
-    // Ready translated locale messages
-    const messages = {
-      'en': {
-        message: {
-          hello: 'hello world'
-        }
-      },
-      'cn': {
-        message: {
-          hello: '世界，你好！'
-        }
-      },
-      'ja': {
-        message: {
-          hello: 'こんにちは、世界'
-        }
-      }
-    }
-
-    // Create VueI18n instance with options
+    Vue.use(VueI18n)
     const i18n = new VueI18n({
       locale: 'ja',
-      messages
+      messages: {
+        en: {
+          message: {
+            hello: 'hello world',
+            greeting: 'good morning'
+          }
+        },
+        ja: {
+          message: {
+            hello: 'こんにちは、世界',
+            greeting: 'おはようございます'
+          }
+        }
+      }
     })
-
-    // create a vue instance with i18n option
+    Vue.component('component1', {
+      template: `
+      <div class="container">
+        <p>Component1 locale messages: {{ $t('message.hello') }}</p>
+        <p>fallback global locale messages: {{ $t('message.greeting') }}</p>
+      </div>`,
+      i18n: {
+        messages:  {
+          en: {
+            message: {
+              hello: 'hello component1'
+            }
+          },
+          ja: {
+            message: {
+              hello: 'こんにちは、component1'
+            }
+          }
+        }
+      }
+    })
     new Vue({
       i18n
     }).$mount('#app')
-
   </script>
 </body>
 
